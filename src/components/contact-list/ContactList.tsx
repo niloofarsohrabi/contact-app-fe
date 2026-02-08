@@ -46,6 +46,22 @@ const ContactList = () => {
 
     setContacts(searchResult);
   };
+  //
+  const onDeleteItemClick = (id: number) => {
+    setContacts((prevState) => prevState.filter((item) => item.id !== id));
+  };
+  //
+  const onDeletedGroupedClicked = (id: number, isChecked: boolean) => {
+    setContacts((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, isSelected: isChecked } : item
+      )
+    );
+  };
+  //
+  const onGroupedDelete = () => {
+    setContacts((prev) => prev.filter((item) => item.isSelected !== true));
+  };
 
   /** Effects */
   useEffect(() => {
@@ -65,10 +81,17 @@ const ContactList = () => {
         onChange={(event) => onSearchHandler(event)}
       />
       <button>Add</button>
-      <button>Delete</button>
+      <button onClick={() => onGroupedDelete()}>Delete</button>
       <div className={styles.contactsContainer}>
         {contacts.map((item) => {
-          return <ContactItem key={item.id} item={item} />;
+          return (
+            <ContactItem
+              key={item.id}
+              item={item}
+              onDeleteItemClick={onDeleteItemClick}
+              onCheckboxSelected={onDeletedGroupedClicked}
+            />
+          );
         })}
       </div>
     </div>
