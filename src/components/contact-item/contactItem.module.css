@@ -1,0 +1,19 @@
+.contactItemContainer {
+  width: 100%;
+  direction: rtl;
+  display: flex;
+  align-items: center;
+}
+
+.contactItemContainer li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.contactItemContainer li span {
+  flex-grow: 1;
+  flex-basis: 0;
+}
